@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntityFrameworkCore.Business\EFCore.Business.csproj" />
+    <ProjectReference Include="..\EntityFrameworkCore.Data\EFCore.Data.csproj" />
+    <ProjectReference Include="..\EntityFrameworkCore.Domain\EFCore.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
