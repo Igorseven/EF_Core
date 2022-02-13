@@ -6,6 +6,7 @@ namespace EFCore.Business.Interfaces.Repository
 {
     public interface IVehicleRepository : IBaseRepository<Vehicle, int>
     {
-        Task<IEnumerable<Vehicle>> GetAllVehiclesAndManufacturers();
+        Task<IEnumerable<Vehicle>> GetAllVehiclesAndManufacturersAsync();
+        Task<Vehicle> GetVehicleAndManufacturerAsync(int id);
     }
 }

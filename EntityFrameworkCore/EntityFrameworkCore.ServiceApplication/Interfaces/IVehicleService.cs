@@ -13,6 +13,7 @@ namespace EFCore.ServiceApplication.Interfaces
         Task DeleteAsync(VehicleRequest request);
         Task<VehicleResponse> FindByAsync(int id);
         Task<VehicleResponse> FindByAsync(VehicleRequest request);
+        Task<VehicleResponse> FindVehickeAndManufacturerAsync(int id);
         Task<IEnumerable<VehicleResponse>> FindAllAsync();
         Task<IEnumerable<VehicleResponse>> GetAllVehiclesAndManufacturers();
     }

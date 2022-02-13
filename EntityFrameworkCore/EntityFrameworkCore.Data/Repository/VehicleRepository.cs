@@ -15,9 +15,14 @@ namespace EFCore.Data.Repository
             this._dbContext = dbContext;
         }
 
-        public virtual async Task<IEnumerable<Vehicle>> GetAllVehiclesAndManufacturers()
+        public virtual async Task<Vehicle> GetVehicleAndManufacturerAsync(int id)
         {
-            return await this._dbContext.Vehicles.Include(m => m.Manufacturer.Name).AsNoTracking().ToListAsync();
+            return await this._dbContext.Vehicles.Include(m => m.Manufacturer).AsNoTracking().FirstOrDefaultAsync();
+        }
+
+        public virtual async Task<IEnumerable<Vehicle>> GetAllVehiclesAndManufacturersAsync()
+        {
+            return await this._dbContext.Vehicles.Include(m => m.Manufacturer).AsNoTracking().ToListAsync();
         }
     }
 }

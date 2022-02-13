@@ -6,6 +6,7 @@
         public string Information { get; set; }
         public decimal Price { get; set; }
 
+        public int ManufacturerId { get; set; }
         public Manufacturer Manufacturer { get; set; }
     }
 }

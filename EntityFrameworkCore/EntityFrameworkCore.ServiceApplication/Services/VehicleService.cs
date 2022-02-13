@@ -79,11 +79,20 @@ namespace EFCore.ServiceApplication.Services
 
         public async Task<IEnumerable<VehicleResponse>> GetAllVehiclesAndManufacturers()
         {
-            var vehicles = await this._repository.GetAllVehiclesAndManufacturers();
+            var vehicles = await this._repository.GetAllVehiclesAndManufacturersAsync();
 
             var responses = vehicles.MapTo<IEnumerable<Vehicle>, IEnumerable<VehicleResponse>>();
 
             return responses;
+        }
+
+        public async Task<VehicleResponse> FindVehickeAndManufacturerAsync(int id)
+        {
+            var vehicle = await this._repository.GetVehicleAndManufacturerAsync(id);
+
+            var response = vehicle.MapTo<Vehicle, VehicleResponse>();
+
+            return response;
         }
     }
 }

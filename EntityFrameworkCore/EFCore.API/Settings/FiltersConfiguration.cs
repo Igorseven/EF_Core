@@ -13,8 +13,6 @@ namespace EFCore.API.Settings
                 config.Filters.AddService<GetNotificationFilter>();
             });
 
-
-
             services.AddScoped<GetNotificationFilter>();
 
         }

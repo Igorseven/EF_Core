@@ -2,7 +2,6 @@
 using EFCore.ServiceApplication.Interfaces;
 using EFCore.ServiceApplication.Request.Vehicle;
 using EFCore.ServiceApplication.Response;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,14 +9,13 @@ using System.Threading.Tasks;
 
 namespace EFCore.API.Controllers
 {
-    //[EnableCors("Default")]
     [ApiController]
     [Route("v1/[controller]")]
     public class VehicleController : ControllerBase
     {
         private IVehicleService _vehicleService;
 
-        public VehicleController( IVehicleService vehicleService)
+        public VehicleController(IVehicleService vehicleService)
         {
             this._vehicleService = vehicleService;
         }
@@ -30,7 +28,7 @@ namespace EFCore.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<DomainNotification>))]
         public async Task<IEnumerable<VehicleResponse>> Get()
         {
-            return await this._vehicleService.FindAllAsync();
+            return await this._vehicleService.GetAllVehiclesAndManufacturers();
         }
 
         [HttpGet]
@@ -39,9 +37,9 @@ namespace EFCore.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<DomainNotification>))]
-        public async Task<VehicleResponse> Get(int id)
+        public async Task<VehicleResponse> Get([FromQuery] int id)
         {
-            return await this._vehicleService.FindByAsync(id);
+            return await this._vehicleService.FindVehickeAndManufacturerAsync(id);
         }
 
         [HttpPost]
@@ -50,9 +48,31 @@ namespace EFCore.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<DomainNotification>))]
-        public async Task Post(VehicleRequest request)
+        public async Task Post([FromBody] VehicleRequest request)
         {
             await this._vehicleService.CreatAsync(request);
+        }
+
+        [HttpPut]
+        [Route("update")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<DomainNotification>))]
+        public async Task Put([FromBody] VehicleUpdateRequest updateRequest)
+        {
+            await this._vehicleService.UpdateAsync(updateRequest);
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<DomainNotification>))]
+        public async Task Delete([FromQuery] int vehicleId)
+        {
+            await this._vehicleService.DeleleByIdAsync(vehicleId);
         }
     }
 }

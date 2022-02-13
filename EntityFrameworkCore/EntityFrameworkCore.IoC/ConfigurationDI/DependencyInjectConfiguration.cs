@@ -6,6 +6,7 @@ using EFCore.Business.Validation.Entities;
 using EFCore.Data.EntityFramework.Context;
 using EFCore.Data.Repository;
 using EFCore.Domain.Entities;
+using EFCore.ServiceApplication.AutoMapperSettings;
 using EFCore.ServiceApplication.AutoMapperSettings.Profiles;
 using EFCore.ServiceApplication.Interfaces;
 using EFCore.ServiceApplication.Services;
@@ -25,16 +26,15 @@ namespace EFCore.IoC.ConfigurationDI
             config.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ApplicationDbContext>();
+            AutoMapperHandler.Inicialze();
 
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 
-            services.AddScoped<IValidation<Vehicle>, VehicleValidation>();
-            services.AddScoped<IValidation<Manufacturer>, ManufacturerValidation>();
+            services.AddValidationDI();
 
             services.AddScoped<INotificationContext, NotificationContext>();
             
-            services.AddAutoMapper(typeof(ManufacturerProfile), typeof(VehicleProfile));
 
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IManufacturerService, ManufacturerService>();

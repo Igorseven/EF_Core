@@ -28,7 +28,7 @@ namespace EFCore.Business.NotificationSettings
             this._notifications.Add(notification);
         }
 
-        public void AddNotifications(IList<DomainNotification> notifications)
+        public void AddNotifications(IEnumerable<DomainNotification> notifications)
         {
             this._notifications.AddRange(notifications);
         }

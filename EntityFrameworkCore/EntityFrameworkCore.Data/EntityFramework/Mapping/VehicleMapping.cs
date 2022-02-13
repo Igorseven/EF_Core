@@ -17,7 +17,7 @@ namespace EFCore.Data.EntityFramework.Mapping
             builder.Property(v => v.Information).HasColumnType("varchar(150)")
                 .HasColumnName("Vehicle_Information").IsUnicode().IsRequired();
 
-            builder.Property(v => v.Price).HasColumnType("numeric").HasPrecision(2)
+            builder.Property(v => v.Price).HasColumnType("numeric").HasPrecision(12, 2)
                 .HasColumnName("Vehicle_Price").IsRequired();
 
         }

@@ -1,6 +1,7 @@
 using EFCore.API.Filters;
 using EFCore.API.Settings;
 using EFCore.IoC.ConfigurationDI;
+using EFCore.ServiceApplication.AutoMapperSettings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,15 +29,15 @@ namespace EFCore.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDependencyInject(Configuration);
-            services.AddCorsConfiguration();
             services.AddFiltersConfiguration();
-            //services.AddScoped<GetNotificationFilter>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EFCore.API", Version = "v1" });
             });
+            services.AddCorsConfiguration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

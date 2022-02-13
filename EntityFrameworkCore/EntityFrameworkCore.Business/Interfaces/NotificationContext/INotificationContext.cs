@@ -10,7 +10,7 @@ namespace EFCore.Business.Interfaces.NotificationContext
         List<DomainNotification> GetNotification();
         void AddNotification(string key, string value);
         void AddNotification(DomainNotification notification);
-        void AddNotifications(IList<DomainNotification> notifications);
+        void AddNotifications(IEnumerable<DomainNotification> notifications);
         void AddNotifications(ValidationResult validationResult);
     }
 }

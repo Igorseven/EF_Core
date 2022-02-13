@@ -14,13 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ExtentionTests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EntityFrameworkCore.Business\EFCore.Business.csproj" />
     <ProjectReference Include="..\EntityFrameworkCore.Data\EFCore.Data.csproj" />
     <ProjectReference Include="..\EntityFrameworkCore.Domain\EFCore.Domain.csproj" />
+    <ProjectReference Include="..\EntityFrameworkCore.IoC\EFCore.IoC.csproj" />
     <ProjectReference Include="..\EntityFrameworkCore.ServiceApplication\EFCore.ServiceApplication.csproj" />
   </ItemGroup>
 
