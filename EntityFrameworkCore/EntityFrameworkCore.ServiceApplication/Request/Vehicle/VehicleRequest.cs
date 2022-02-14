@@ -8,6 +8,6 @@ namespace EFCore.ServiceApplication.Request.Vehicle
         public string Information { get; set; }
         public decimal Price { get; set; }
 
-        public ManufacturerRequest ManufacturerRequest { get; set; }
+        public int ManufacturerId { get; set; }
     }
 }

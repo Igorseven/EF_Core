@@ -2,6 +2,7 @@
 using EFCore.Business.Interfaces.Repository;
 using EFCore.Business.Interfaces.ValidationContext;
 using EFCore.Domain.Entities;
+using EFCore.Domain.EntitiesValidation;
 using EFCore.ServiceApplication.AutoMapperSettings;
 using EFCore.ServiceApplication.Interfaces;
 using EFCore.ServiceApplication.Request.Vehicle;
@@ -11,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace EFCore.ServiceApplication.Services
 {
-    public class VehicleService : BaseService<Vehicle>, IVehicleService
+    public class VehicleService : BaseService<Vehicle, VehicleValidation>, IVehicleService
     {
         private readonly IVehicleRepository _repository;
 
-        public VehicleService(INotificationContext notification, IValidation<Vehicle> validation, IVehicleRepository repository)
+        public VehicleService(INotificationContext notification, IDomainValidation validation, IVehicleRepository repository)
             : base(notification, validation)
         {
             this._repository = repository;
@@ -25,7 +26,7 @@ namespace EFCore.ServiceApplication.Services
         {
             var vehicle = request.MapTo<VehicleRequest, Vehicle>();
 
-            if (await ValidatedAsync(vehicle))
+            if (await ValidatedAsync(vehicle, new VehicleValidation()))
                await this._repository.CreatAsync(vehicle);
         }
 
@@ -33,7 +34,7 @@ namespace EFCore.ServiceApplication.Services
         {
             var vehicle = request.MapTo<VehicleUpdateRequest, Vehicle>();
 
-            if (await ValidatedAsync(vehicle))
+            if (await ValidatedAsync(vehicle, new VehicleValidation()))
                 await this._repository.UpdateAsync(vehicle);
         }
 

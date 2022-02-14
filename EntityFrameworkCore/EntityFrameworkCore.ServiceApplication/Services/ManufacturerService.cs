@@ -2,6 +2,7 @@
 using EFCore.Business.Interfaces.Repository;
 using EFCore.Business.Interfaces.ValidationContext;
 using EFCore.Domain.Entities;
+using EFCore.Domain.EntitiesValidation;
 using EFCore.ServiceApplication.AutoMapperSettings;
 using EFCore.ServiceApplication.Interfaces;
 using EFCore.ServiceApplication.Request.Manufacturer;
@@ -11,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace EFCore.ServiceApplication.Services
 {
-    public class ManufacturerService : BaseService<Manufacturer>, IManufacturerService
+    public class ManufacturerService : BaseService<Manufacturer, ManufacturerValidation>, IManufacturerService
     {
         private readonly IManufacturerRepository _repository;
 
-        public ManufacturerService(INotificationContext notification, IValidation<Manufacturer> validation, IManufacturerRepository repository)
+        public ManufacturerService(INotificationContext notification, IDomainValidation validation, IManufacturerRepository repository)
             : base(notification, validation)
         {
             this._repository = repository;
@@ -25,7 +26,7 @@ namespace EFCore.ServiceApplication.Services
         {
             var manufacturer = request.MapTo<ManufacturerRequest, Manufacturer>();
 
-            if(await ValidatedAsync(manufacturer))
+            if(await ValidatedAsync(manufacturer, new ManufacturerValidation()))
             {
                 await this._repository.CreatAsync(manufacturer);
             }
@@ -35,7 +36,7 @@ namespace EFCore.ServiceApplication.Services
         {
             var manufacturer = request.MapTo<ManufacturerUpdateRequest, Manufacturer>();
 
-            if (await ValidatedAsync(manufacturer))
+            if (await ValidatedAsync(manufacturer, new ManufacturerValidation()))
             {
                 await this._repository.UpdateAsync(manufacturer);
             }

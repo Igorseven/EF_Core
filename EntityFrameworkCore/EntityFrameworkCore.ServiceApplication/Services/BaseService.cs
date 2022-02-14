@@ -2,33 +2,38 @@
 using EFCore.Business.Interfaces.ValidationContext;
 using EFCore.Domain.Enums;
 using EFCore.Domain.Extention;
+using FluentValidation;
 using System.Threading.Tasks;
 
 namespace EFCore.ServiceApplication.Services
 {
-    public abstract class BaseService<TEntity> where TEntity : class
+    public abstract class BaseService<TEntity, TValidate> 
+        where TEntity : class 
+        where TValidate : AbstractValidator<TEntity>
     {
         private readonly INotificationContext _notification;
-        private readonly IValidation<TEntity> _validation;
+        private readonly IDomainValidation _validation;
 
-        protected BaseService(INotificationContext notification, IValidation<TEntity> validation)
+        protected BaseService(INotificationContext notification, IDomainValidation validation)
         {
             this._notification = notification;
             this._validation = validation;
         }
 
-        public async Task<bool> ValidatedAsync(TEntity entity)
+        public async Task<bool> ValidatedAsync(TEntity entity, TValidate validate)
         {
-            if (this._validation is null)
+            if (entity is null)
             {
                 this._notification.AddNotification("Invalid", EMessage.ErrorNotConfigured.Description());
             }
 
-            var response = await this._validation.ValidationAsync(entity);
+            await _validation.ValidateAsync(entity, validate);
+
+            var response = this._validation.Validation();
 
             if (!response.Valid)
             {
-                this._notification.AddNotification(response.Errors.Keys.ToString(), response.Errors.Values.ToString());
+                this._notification.AddNotifications(_validation.ValidationResult);
             }
 
             return response.Valid;

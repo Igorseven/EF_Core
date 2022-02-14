@@ -9,6 +9,6 @@ namespace EFCore.ServiceApplication.Request.Vehicle
         public string Information { get; set; }
         public decimal Price { get; set; }
 
-        public ManufacturerUpdateRequest ManufacturerUpdateRequest { get; set; }
+        public int ManufacturerId { get; set; }
     }
 }

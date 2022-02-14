@@ -3,9 +3,9 @@ using EFCore.Domain.Enums;
 using EFCore.Domain.Extention;
 using FluentValidation;
 
-namespace EFCore.Business.Validation.Entities
+namespace EFCore.Domain.EntitiesValidation
 {
-    public class ManufacturerValidation : Validate<Manufacturer>
+    public class ManufacturerValidation : AbstractValidator<Manufacturer>
     {
         public ManufacturerValidation()
         {
@@ -15,8 +15,10 @@ namespace EFCore.Business.Validation.Entities
         private void CreateRules()
         {
             RuleFor(m => m.Name).NotEmpty().WithMessage(EMessage.Required.Description());
-            RuleFor(m => m.Name).Length(3, 50).WithMessage(EMessage.MoreExpected
-                .Description().ToFormatMessage("Manufacturer Name", "3 to 50"));
+            RuleFor(m => m.Name).Length(2, 50).WithMessage(EMessage.MoreExpected
+                .Description().ToFormatMessage("Manufacturer Name", "3 a 50"));
         }
     }
+
+    
 }

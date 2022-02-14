@@ -10,14 +10,14 @@ namespace EFCore.ServiceApplication.AutoMapperSettings.Profiles
         public VehicleProfile()
         {
             CreateMap<Vehicle, VehicleRequest>()
-                .ForMember(vr => vr.ManufacturerRequest, map => map.MapFrom(v => v.Manufacturer))
+                .ForMember(vr => vr.ManufacturerId, map => map.MapFrom(v => v.ManufacturerId))
                 .ReverseMap()
-                .ForPath(v => v.Manufacturer, map => map.MapFrom(vr => vr.ManufacturerRequest));
+                .ForPath(v => v.ManufacturerId, map => map.MapFrom(vr => vr.ManufacturerId));
 
             CreateMap<Vehicle, VehicleUpdateRequest>()
-                .ForMember(vu => vu.ManufacturerUpdateRequest, map => map.MapFrom(v => v.Manufacturer))
+                .ForMember(vr => vr.ManufacturerId, map => map.MapFrom(v => v.ManufacturerId))
                 .ReverseMap()
-                .ForPath(v => v.Manufacturer, map => map.MapFrom(vu => vu.ManufacturerUpdateRequest));
+                .ForPath(v => v.ManufacturerId, map => map.MapFrom(vr => vr.ManufacturerId));
 
             CreateMap<Vehicle, VehicleResponse>()
                 .ForMember(vr => vr.ManufacturerResponse, map => map.MapFrom(v => v.Manufacturer))

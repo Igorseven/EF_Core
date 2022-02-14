@@ -3,9 +3,9 @@ using EFCore.Domain.Enums;
 using EFCore.Domain.Extention;
 using FluentValidation;
 
-namespace EFCore.Business.Validation.Entities
+namespace EFCore.Domain.EntitiesValidation
 {
-    public class VehicleValidation : Validate<Vehicle>
+    public class VehicleValidation : AbstractValidator<Vehicle>
     {
         public VehicleValidation()
         {

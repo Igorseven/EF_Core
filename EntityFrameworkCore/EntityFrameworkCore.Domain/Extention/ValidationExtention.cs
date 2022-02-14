@@ -13,7 +13,7 @@ namespace EFCore.Domain.Extention
             {
                 if (!result.ContainsKey(erro.PropertyName))
                 {
-                    result.Add(erro.PropertyName, erro.ErrorMessage);
+                    result.Add(erro.PropertyName.ToString(), erro.ErrorMessage.ToString());
                 }
             }
 

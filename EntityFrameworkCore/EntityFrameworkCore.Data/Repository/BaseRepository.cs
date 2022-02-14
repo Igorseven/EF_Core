@@ -64,10 +64,10 @@ namespace EFCore.Data.Repository
 
             if (where != null)
             {
-                query = query.AsNoTracking().Where(where);
+                query = query.Where(where);
             }
 
-            return query.AsNoTracking();
+            return query;
         }
     }
 }

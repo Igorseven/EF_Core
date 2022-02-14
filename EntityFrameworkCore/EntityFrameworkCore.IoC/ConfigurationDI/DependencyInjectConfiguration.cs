@@ -2,7 +2,7 @@
 using EFCore.Business.Interfaces.Repository;
 using EFCore.Business.Interfaces.ValidationContext;
 using EFCore.Business.NotificationSettings;
-using EFCore.Business.Validation.Entities;
+using EFCore.Business.Validation;
 using EFCore.Data.EntityFramework.Context;
 using EFCore.Data.Repository;
 using EFCore.Domain.Entities;
@@ -31,7 +31,8 @@ namespace EFCore.IoC.ConfigurationDI
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 
-            services.AddValidationDI();
+            services.AddScoped<IDomainValidation, DomainValidation>();
+
 
             services.AddScoped<INotificationContext, NotificationContext>();
             

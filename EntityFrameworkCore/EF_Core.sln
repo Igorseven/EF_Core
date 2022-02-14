@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Test", "5 - Test", "{D6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.Test", "EntityFrameworkCore.Test\EFCore.Test.csproj", "{625B4B4F-C856-4914-A4F5-7DDFE7A0CA64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.API", "EFCore.API\EFCore.API.csproj", "{8CE87424-245E-4833-8D03-AE746CB05255}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.API", "EFCore.API\EFCore.API.csproj", "{8CE87424-245E-4833-8D03-AE746CB05255}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

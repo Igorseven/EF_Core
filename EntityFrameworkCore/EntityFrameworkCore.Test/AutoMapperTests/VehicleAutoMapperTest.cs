@@ -32,6 +32,7 @@ namespace EFCore.Test.AutoMapperTests
 
         private void CreateVehicle()
         {
+
             var manufacturer1 = this.Manufacturer = new Manufacturer
             {
                 Id = 2,
@@ -43,6 +44,7 @@ namespace EFCore.Test.AutoMapperTests
                 Id = 1,
                 Model = "X6",
                 Information = "Completo - 2018",
+                ManufacturerId = manufacturer1.Id,
                 Manufacturer = manufacturer1,
                 Price = 536.000m
             };
@@ -50,16 +52,17 @@ namespace EFCore.Test.AutoMapperTests
 
         private void CreateRequest()
         {
-            var manufacturerRquest1 = this.ManufacturerRequest = new ManufacturerRequest
+            var manufacturer2 = this.Manufacturer = new Manufacturer
             {
-                Name = "Mercedes-Benz"
+                Id = 1,
+                Name = "AUDI"
             };
 
             this.VehicleRequest = new VehicleRequest
             {
                 Model = "MB 755",
                 Information = "Master Mb - 2020",
-                ManufacturerRequest = manufacturerRquest1,
+                ManufacturerId = manufacturer2.Id,
                 Price = 399.000m
             };
         }
@@ -77,7 +80,7 @@ namespace EFCore.Test.AutoMapperTests
                 Id = 10,
                 Model = "Cobra Shell v8",
                 Information = "Top line - 2022",
-                ManufacturerUpdateRequest = manufacturerUpdate1,
+                ManufacturerId = manufacturerUpdate1.Id,
                 Price = 399.000m
             };
         }
@@ -114,7 +117,7 @@ namespace EFCore.Test.AutoMapperTests
 
             Assert.Equal(request.Model, vehicle.Model);
             Assert.Equal(request.Information, vehicle.Information);
-            Assert.Equal(request.ManufacturerRequest.Name, vehicle.Manufacturer.Name);
+            Assert.Equal(request.ManufacturerId, vehicle.Manufacturer.Id);
             Assert.Equal(request.Price, vehicle.Price);
         }
 
@@ -127,7 +130,7 @@ namespace EFCore.Test.AutoMapperTests
 
             Assert.Equal(vehicle.Model, request.Model);
             Assert.Equal(vehicle.Information, request.Information);
-            Assert.Equal(vehicle.Manufacturer.Name, request.ManufacturerRequest.Name);
+            Assert.Equal(vehicle.ManufacturerId, request.ManufacturerId);
             Assert.Equal(vehicle.Price, request.Price);
         }
 
@@ -140,7 +143,7 @@ namespace EFCore.Test.AutoMapperTests
 
             Assert.Equal(RequestUpdate.Model, vehicle.Model);
             Assert.Equal(RequestUpdate.Information, vehicle.Information);
-            Assert.Equal(RequestUpdate.ManufacturerUpdateRequest.Name, vehicle.Manufacturer.Name);
+            Assert.Equal(RequestUpdate.ManufacturerId, vehicle.Manufacturer.Id);
             Assert.Equal(RequestUpdate.Price, vehicle.Price);
         }
 
@@ -153,7 +156,7 @@ namespace EFCore.Test.AutoMapperTests
 
             Assert.Equal(vehicle.Model, requestUpdate.Model);
             Assert.Equal(vehicle.Information, requestUpdate.Information);
-            Assert.Equal(vehicle.Manufacturer.Name, requestUpdate.ManufacturerUpdateRequest.Name);
+            Assert.Equal(vehicle.ManufacturerId, requestUpdate.ManufacturerId);
             Assert.Equal(vehicle.Price, requestUpdate.Price);
         }
 
