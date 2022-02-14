@@ -14,9 +14,9 @@ namespace EFCore.Domain.EntitiesValidation
 
         private void CreateRules()
         {
-            RuleFor(m => m.Name).NotEmpty().WithMessage(EMessage.Required.Description());
+            RuleFor(m => m.Name).NotEmpty().WithMessage(EMessage.Required.Description().ToFormatMessage("Name"));
             RuleFor(m => m.Name).Length(2, 50).WithMessage(EMessage.MoreExpected
-                .Description().ToFormatMessage("Manufacturer Name", "3 a 50"));
+                .Description().ToFormatMessage("Manufacturer Name", "2 a 50"));
         }
     }
 

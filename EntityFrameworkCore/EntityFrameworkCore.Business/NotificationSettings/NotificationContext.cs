@@ -37,7 +37,7 @@ namespace EFCore.Business.NotificationSettings
         {
             foreach (var erro in validationResult.Errors)
             {
-                AddNotification(erro.ErrorCode, erro.ErrorMessage);
+                AddNotification(erro.PropertyName, erro.ErrorMessage);
             }
         }
 

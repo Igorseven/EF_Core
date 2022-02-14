@@ -1,7 +1,5 @@
 ﻿using EFCore.Business.Interfaces.NotificationContext;
 using EFCore.Business.Interfaces.ValidationContext;
-using EFCore.Domain.Enums;
-using EFCore.Domain.Extention;
 using FluentValidation;
 using System.Threading.Tasks;
 
@@ -22,21 +20,15 @@ namespace EFCore.ServiceApplication.Services
 
         public async Task<bool> ValidatedAsync(TEntity entity, TValidate validate)
         {
-            if (entity is null)
-            {
-                this._notification.AddNotification("Invalid", EMessage.ErrorNotConfigured.Description());
-            }
 
-            await _validation.ValidateAsync(entity, validate);
+            var entityResult = await _validation.ValidateAsync(entity, validate);
 
-            var response = this._validation.Validation();
-
-            if (!response.Valid)
+            if (!entityResult)
             {
                 this._notification.AddNotifications(_validation.ValidationResult);
             }
 
-            return response.Valid;
+            return entityResult;
         }
     }
 }

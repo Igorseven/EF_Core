@@ -4,7 +4,7 @@ namespace EFCore.Domain.Enums
 {
     public enum EMessage
     {
-        [Description("{} obrigatório.")]
+        [Description("{0} obrigatório.")]
         Required,
 
         [Description("Campo {0} permite de {1} caracteres.")]
