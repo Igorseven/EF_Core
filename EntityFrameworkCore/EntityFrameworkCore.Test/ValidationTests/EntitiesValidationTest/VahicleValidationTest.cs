@@ -18,7 +18,7 @@ namespace EFCore.Test.ValidationTests.EntitiesValidationTest
         [Trait("Properties Validation", "Valid state")]
         public void VehicleValidation_WithPropertiesValids_ValidState()
         {
-            var vehicle = VehicleBuilder.NewObject().Build();
+            var vehicle = VehicleBuilder.NewObject().DomainVehicleBuild();
 
             bool result = _validation.Validate(vehicle, new VehicleValidation());
 
@@ -32,7 +32,7 @@ namespace EFCore.Test.ValidationTests.EntitiesValidationTest
         [InlineData("Testanto o max length da propriedade Model")]
         public void VehicleValidation_WithModelPropertyInvalid_InvalidState(string model)
         {
-            var vehicle = VehicleBuilder.NewObject().WithModel(model).Build();
+            var vehicle = VehicleBuilder.NewObject().WithModel(model).DomainVehicleBuild();
 
             bool result = _validation.Validate(vehicle, new VehicleValidation());
 
@@ -46,7 +46,7 @@ namespace EFCore.Test.ValidationTests.EntitiesValidationTest
         [InlineData("In")]
         public void VehicleValidation_WithInformationPropertyInvalid_InvalidState(string information)
         {
-            var vehicle = VehicleBuilder.NewObject().WithInformation(information).Build();
+            var vehicle = VehicleBuilder.NewObject().WithInformation(information).DomainVehicleBuild();
 
             bool result = _validation.Validate(vehicle, new VehicleValidation());
 
@@ -61,7 +61,7 @@ namespace EFCore.Test.ValidationTests.EntitiesValidationTest
         [InlineData(-1)]
         public void VehicleValidation_WithPriceInvalid_InvalidState(decimal price)
         {
-            var vehicle = VehicleBuilder.NewObject().WithPrice(price).Build();
+            var vehicle = VehicleBuilder.NewObject().WithPrice(price).DomainVehicleBuild();
 
             bool result = _validation.Validate(vehicle, new VehicleValidation());
 

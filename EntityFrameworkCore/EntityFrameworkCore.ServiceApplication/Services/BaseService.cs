@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace EFCore.ServiceApplication.Services
 {
-    public abstract class BaseService<TEntity, TValidate> 
-        where TEntity : class 
-        where TValidate : AbstractValidator<TEntity>
+    public abstract class BaseService
     {
         private readonly INotificationContext _notification;
         private readonly IDomainValidation _validation;
@@ -18,7 +16,9 @@ namespace EFCore.ServiceApplication.Services
             this._validation = validation;
         }
 
-        public async Task<bool> ValidatedAsync(TEntity entity, TValidate validate)
+        public async Task<bool> ValidatedAsync<TEntity, TValidate>(TEntity entity, TValidate validate) 
+            where TEntity : class
+            where TValidate : AbstractValidator<TEntity>
         {
 
             var entityResult = await _validation.ValidateAsync(entity, validate);

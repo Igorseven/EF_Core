@@ -5,15 +5,12 @@ using EFCore.Business.NotificationSettings;
 using EFCore.Business.Validation;
 using EFCore.Data.EntityFramework.Context;
 using EFCore.Data.Repository;
-using EFCore.Domain.Entities;
 using EFCore.ServiceApplication.AutoMapperSettings;
-using EFCore.ServiceApplication.AutoMapperSettings.Profiles;
 using EFCore.ServiceApplication.Interfaces;
 using EFCore.ServiceApplication.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace EFCore.IoC.ConfigurationDI
 {
@@ -26,16 +23,14 @@ namespace EFCore.IoC.ConfigurationDI
             config.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ApplicationDbContext>();
+
             AutoMapperHandler.Inicialze();
+
+            services.AddScoped<IDomainValidation, DomainValidation>();
+            services.AddScoped<INotificationContext, NotificationContext>();
 
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
-
-            services.AddScoped<IDomainValidation, DomainValidation>();
-
-
-            services.AddScoped<INotificationContext, NotificationContext>();
-            
 
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IManufacturerService, ManufacturerService>();

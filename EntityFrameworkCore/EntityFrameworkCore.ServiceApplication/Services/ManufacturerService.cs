@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EFCore.ServiceApplication.Services
 {
-    public class ManufacturerService : BaseService<Manufacturer, ManufacturerValidation>, IManufacturerService
+    public class ManufacturerService : BaseService, IManufacturerService
     {
         private readonly IManufacturerRepository _repository;
 

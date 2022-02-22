@@ -18,7 +18,7 @@ namespace EFCore.Test.BuilderSettings
             return this;
         }
 
-        public Manufacturer Build()
+        public Manufacturer DomainManufacturerBuild()
         {
             return new Manufacturer { Id = _id, Name = _name };
         }

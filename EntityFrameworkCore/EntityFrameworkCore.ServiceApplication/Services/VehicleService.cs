@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EFCore.ServiceApplication.Services
 {
-    public class VehicleService : BaseService<Vehicle, VehicleValidation>, IVehicleService
+    public class VehicleService : BaseService, IVehicleService
     {
         private readonly IVehicleRepository _repository;
 

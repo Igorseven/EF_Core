@@ -33,7 +33,7 @@ namespace EFCore.Test.BuilderSettings
             return this;
         }
 
-        public Vehicle Build()
+        public Vehicle DomainVehicleBuild()
         {
             return new Vehicle 
             { 

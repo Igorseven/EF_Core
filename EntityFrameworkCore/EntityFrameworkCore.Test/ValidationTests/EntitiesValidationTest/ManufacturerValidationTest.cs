@@ -18,7 +18,7 @@ namespace EFCore.Test.ValidationTests.EntitiesValidationTest
         [Trait("Properties Validation", "Valid State")]
         public void ManufacturerValidation_WithPropertiesValid_ValidState()
         {
-            var manufacturer = ManufacturerBuilder.NewObject().Build();
+            var manufacturer = ManufacturerBuilder.NewObject().DomainManufacturerBuild();
 
             bool result = this._validation.Validate(manufacturer, new ManufacturerValidation());
 
@@ -31,7 +31,7 @@ namespace EFCore.Test.ValidationTests.EntitiesValidationTest
         [InlineData("M")]
         public void ManufacturerValidation_WithPropertyNameInvalid_InvalidState(string name)
         {
-            var manufacturer = ManufacturerBuilder.NewObject().WithName(name).Build();
+            var manufacturer = ManufacturerBuilder.NewObject().WithName(name).DomainManufacturerBuild();
 
             bool result = this._validation.Validate(manufacturer, new ManufacturerValidation());
 
